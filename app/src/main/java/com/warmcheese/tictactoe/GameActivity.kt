@@ -17,8 +17,6 @@ class GameActivity : AppCompatActivity() {
         // get references to ImageViews
         val imageViewYou = findViewById<ImageView>(R.id.imageViewYou)
         val imageViewOpponent = findViewById<ImageView>(R.id.imageViewOpponent)
-        val ivPlayerMove = findViewById<ImageView>(R.id.ivPlayerMove)
-        val ivComputerMove = findViewById<ImageView>(R.id.ivComputerMove)
         val ivGrid1 = findViewById<ImageView>(R.id.ivGrid1)
         val ivGrid2 = findViewById<ImageView>(R.id.ivGrid2)
         val ivGrid3 = findViewById<ImageView>(R.id.ivGrid3)
@@ -62,7 +60,8 @@ class GameActivity : AppCompatActivity() {
 
     private fun playGame(ivGameBoardReferences:Array<ImageView>, player:Int, computer:Int) {
         var playerMove:Boolean = true
-        var gameBoard = Array<Int>(9, {0})
+        val unpickedBoardSquare = 0
+        var gameBoard = Array<Int>(9, {unpickedBoardSquare})
         val playerChoice = 1
         val computerChoice = 2
 
@@ -104,16 +103,9 @@ class GameActivity : AppCompatActivity() {
 
     private fun calculateWinner(gameBoard:Array<Int>) : Int {
 
-        val wl1 = WinningLine(0,1,2)
-        val wl2 = WinningLine(3,4,5)
-        val wl3 = WinningLine(6,7,8)
-        val wl4 = WinningLine(0,3,6)
-        val wl5 = WinningLine(1,4,7)
-        val wl6 = WinningLine(2,5,8)
-        val wl7 = WinningLine(0,4,8)
-        val wl8 = WinningLine(2,4,6)
+        val noWinner = 0
 
-        val winningLines = arrayOf<WinningLine>(wl1,wl2,wl3,wl4,wl5,wl6,wl7,wl8)
+        val winningLines = WinningLines().getWinningLines()
 
         for(wl in winningLines) {
             var a = wl.indexOne
@@ -125,7 +117,7 @@ class GameActivity : AppCompatActivity() {
                 return gameBoard[a]
             }
         }
-        return 0
+        return noWinner
     }
 
 }

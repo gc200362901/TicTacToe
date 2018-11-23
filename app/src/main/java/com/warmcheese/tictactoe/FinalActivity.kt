@@ -13,7 +13,7 @@ class FinalActivity : AppCompatActivity() {
         // get ImageView reference
         val ivWinner = findViewById<ImageView>(R.id.ivWinner)
 
-        // get data passed from main activity for player1
+        // get data passed from game activity for winner
         val intent = intent
         val winner:Int = intent.getIntExtra("winner", 0)
 
